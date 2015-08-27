@@ -2,14 +2,15 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from rest_framework import routers
 
-from MASTER.views import KabupatenViewSet, KecamatanViewSet, KelurahanViewSet
-
+from MASTER.views import KabupatenViewSet, KecamatanViewSet, KelurahanViewSet, DusunViewSet, ProvinsiViewSet
 
 admin.autodiscover()
 
 router = routers.DefaultRouter()
+router.register(r'provinsis', ProvinsiViewSet)
 router.register(r'kabupatens', KabupatenViewSet)
 router.register(r'kecamatans', KecamatanViewSet)
+router.register(r'dusuns', DusunViewSet)
 
 
 urlpatterns = [

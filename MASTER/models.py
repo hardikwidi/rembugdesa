@@ -1,8 +1,23 @@
 from django.db import models
 from import_export import resources
 
+class Provinsi(models.Model):
+    nama_provinsi = models.CharField(max_length=100)
+    keterangan = models.CharField(max_length=500)
+
+    createtime = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updatetime = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __unicode__(self):
+        return self.nama_provinsi
+
+class ProvinsiResource(resources.ModelResource):
+    class Meta:
+        model = Provinsi
+
 
 class Kabupaten(models.Model):
+    id_provinsi = models.ForeignKey(Provinsi)
     nama_kabupaten = models.CharField(max_length=100)
     keterangan = models.CharField(max_length=500)
 
@@ -18,7 +33,7 @@ class KabupatenResource(resources.ModelResource):
 
 
 class Kecamatan(models.Model):
-    nama_kabupaten = models.ForeignKey(Kabupaten)
+    id_kabupaten = models.ForeignKey(Kabupaten)
     nama_kecamatan = models.CharField(max_length=100)
     keterangan = models.CharField(max_length=500)
 
@@ -35,7 +50,7 @@ class KecamatanResource(resources.ModelResource):
 
 
 class Kelurahan(models.Model):
-    nama_kecamatan = models.ForeignKey(Kecamatan)
+    id_kecamatan = models.ForeignKey(Kecamatan)
     nama_kelurahan = models.CharField(max_length=100)
     keterangan = models.CharField(max_length=500)
 
@@ -49,3 +64,20 @@ class Kelurahan(models.Model):
 class KelurahanResource(resources.ModelResource):
     class Meta:
         model = Kelurahan
+
+
+class Dusun(models.Model):
+    id_kelurahan = models.ForeignKey(Kelurahan)
+    nama_dusun = models.CharField(max_length=100)
+    keterangan = models.CharField(max_length=500)
+
+    createtime = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updatetime = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __unicode__(self):
+        return self.nama_dusun
+
+
+class DusunResource(resources.ModelResource):
+    class Meta:
+        model = Dusun
