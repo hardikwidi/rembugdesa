@@ -1,6 +1,8 @@
 from django.db import models
 from import_export import resources
 
+
+
 class Provinsi(models.Model):
     nama_provinsi = models.CharField(max_length=100)
     keterangan = models.CharField(max_length=500)
@@ -81,3 +83,23 @@ class Dusun(models.Model):
 class DusunResource(resources.ModelResource):
     class Meta:
         model = Dusun
+<<<<<<< HEAD
+=======
+
+
+
+class Peralatan(models.Model):
+    nama_peralatan = models.CharField(max_length=100)
+
+
+    createtime = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updatetime = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __unicode__(self):
+        return self.nama_peralatan
+
+
+class PeralatanResource(resources.ModelResource):
+    class Meta:
+        model = Peralatan
+>>>>>>> 58d9661c466c7b4de1d8096096fb78de7020e426
